@@ -22,6 +22,14 @@ exports.createUser = (req, res, next) => {
         userData.hash = req.body.password;
     if (req.body.hash)
         userData.hash = req.body.hash;
+    if (req.body.name)
+        userData.name = req.body.name;
+    if (req.body.phoneProvider)
+        userData.phoneProvider = req.body.phoneProvider;
+    if (req.body.phoneNumber)
+        userData.phoneNumber = req.body.phoneNumber;
+    if (req.body.classYear)
+        userData.classYear = req.body.classYear;
 
     // create new user
     const newUser = new User(userData);
