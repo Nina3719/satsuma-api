@@ -17,6 +17,8 @@ router.route('/users')
   .put(auth.validateUser, users.updateUser)
   .delete(auth.validateUser, users.deleteUser)
 
+router.route('/allusers')
+  .get(users.getAllUsers)
 /*
 * Auth Routes
 */
