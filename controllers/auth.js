@@ -3,11 +3,13 @@ const jwt = require('jwt-simple');
 const config = require('../models/config');
 
 exports.loginUser = (req, res, next) => {
+    console.log(req.body)
     if (typeof req.body.email !== 'string')
         return res.status(400).send('Missing email');
     if (typeof req.body.password !== 'string')
         return res.status(400).send('Missing password');
-
+    console.log(typeof(req.body.email))
+    console.log(typeof(req.body.password))
     User.findOne({email: req.body.email}, (err, user) => {
         if (err) return next(err);
         if (!user) return res.status(400).send('No user with that email');
