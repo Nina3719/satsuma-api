@@ -5,6 +5,7 @@ const router = express.Router();
 
 const auth = require('../controllers/auth')
 const users = require('../controllers/users')
+const yelp = require('../controllers/yelp')
 
 
 /*
@@ -21,6 +22,13 @@ router.route('/users')
 */
 router.route('/auth/login')
   .post(auth.loginUser);
+
+/*
+* Yelp Routes
+*/ 
+
+router.route('/yelpinfo')
+  .get(yelp.getYelp)
 
 // expose routes through router object
 module.exports = router;
