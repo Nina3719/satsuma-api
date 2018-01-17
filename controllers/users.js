@@ -16,6 +16,7 @@ exports.createUser = (req, res, next) => {
         else
             userData.email = req.body.email;
     }
+    console.log(req.body.email)
 
     // check if password was provided
     if (req.body.password)

@@ -8,8 +8,6 @@ exports.loginUser = (req, res, next) => {
         return res.status(400).send('Missing email');
     if (typeof req.body.password !== 'string')
         return res.status(400).send('Missing password');
-    console.log(typeof(req.body.email))
-    console.log(typeof(req.body.password))
     User.findOne({email: req.body.email}, (err, user) => {
         if (err) return next(err);
         if (!user) return res.status(400).send('No user with that email');
@@ -28,7 +26,7 @@ exports.loginUser = (req, res, next) => {
             user.token = token;
             user.save((err) => {
                 if (err) return next(err);
-                res.json({ token, userId: user._id });
+                return res.json({ token, userId: user._id });
             });
         });
     });
