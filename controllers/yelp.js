@@ -7,15 +7,11 @@ const jwt = require('jwt-simple')
 
 exports.getYelp = (req, res, next) => {
 
-	console.log("hi!")
-
-
 	client.search(req.body).then(response => {
-		console.log(response)
 		const firstResult = response.jsonBody.businesses[0];
     	const prettyJson = JSON.stringify(firstResult, null, 4);
     	console.log(prettyJson)
-    	return res.json(prettyJson);
+    	return res.json(response);
   	}).catch(err => {
     	if (err) {
     		return res.status(400).send(err.message)
