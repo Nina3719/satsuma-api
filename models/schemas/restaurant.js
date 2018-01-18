@@ -2,12 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const restaurantSchema = new Schema({
-    id: {type: String, unique: true},
-    appointments: [{
-        userId: {type: Schema.ObjectId, ref: 'User'},
-        time: Date,
-    }]
+const appointmentSchema = new Schema({
+    restId: String,
+    userId: String,
+    time: Date
   }, 
   {
     toObject: { getters: true },
@@ -17,6 +15,6 @@ const restaurantSchema = new Schema({
     },
 })
 
-const Restaurant = mongoose.model('Restaurant', restaurantSchema)
+const Appointment = mongoose.model('Appointment', appointmentSchema)
 
-module.exports = Restaurant
+module.exports = Appointment
