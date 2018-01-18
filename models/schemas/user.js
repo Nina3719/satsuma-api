@@ -11,7 +11,7 @@ var userSchema = new Schema({
     phoneNumber: String,
     phoneProvider: String,
     picture: String,
-    ratings: [Number],
+    ratings: [String],
     description: String,
     classYear: Number,
     favorites: [String]

@@ -73,11 +73,21 @@ exports.getUserById = (req, res, next) => {
 };
 
 exports.updateUser = (req, res, next) => {
-    User.findOneAndUpdate(req.body.id, req.body).then(user => {
-        if (!user) return res.status(404).send('No user with that ID');
-        return res.sendStatus(200);
-    }).catch(next);
-};
+    console.log(req.body)
+    User.update(
+        { _id: req.body.id},
+        { $push: {ratings: req.body.ratings}}
+    ).then(user => {
+        console.log(user)
+    })
+    return res.sendStatus(200)
+}
+    // User.findByIdAndUpdate(req.body.id, req.body).then(user => {
+    //     if (!user) return res.status(404).send('No user with that ID');
+    //     console.log(req.body)
+    //     return res.sendStatus(200);
+    // }).catch(next);
+// };
 
 exports.deleteUser = (req, res, next) => {
     User.findByIdAndRemove(req.body.id)

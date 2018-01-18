@@ -14,7 +14,7 @@ const yelp = require('../controllers/yelp')
 router.route('/users')
   .post(users.createUser)
   .get(auth.validateUser, users.getUserById)
-  .put(auth.validateUser, users.updateUser)
+  .put(users.updateUser)
   .delete(auth.validateUser, users.deleteUser)
 
 router.route('/allusers')
