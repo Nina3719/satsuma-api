@@ -10,7 +10,6 @@ exports.getYelp = (req, res, next) => {
 	client.search(req.body).then(response => {
 		const firstResult = response.jsonBody.businesses[0];
     	const prettyJson = JSON.stringify(firstResult, null, 4);
-    	console.log(prettyJson)
     	return res.json(response);
   	}).catch(err => {
     	if (err) {
