@@ -80,12 +80,21 @@ exports.getUserById = (req, res, next) => {
 // };
 
 exports.updateUser = (req, res, next) => {
-  User.findOneAndUpdate({ _id: req.params.userId }, req.body, {}, (err, user) => {
-    if (err) return next(err)
-    if (!user) return res.status(404).send('Could not find user: ' + req.params.userId)
+    console.log(req.body)
+    User.update(
+        { _id: req.body.id},
+        { $push: {ratings: req.body.ratings}}
+    ).then(user => {
+        console.log(user)
+    })
     return res.sendStatus(200)
-  })
 }
+    // User.findByIdAndUpdate(req.body.id, req.body).then(user => {
+    //     if (!user) return res.status(404).send('No user with that ID');
+    //     console.log(req.body)
+    //     return res.sendStatus(200);
+    // }).catch(next);
+// };
 
 exports.deleteUser = (req, res, next) => {
     User.findByIdAndRemove(req.body.id)
