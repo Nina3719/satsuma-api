@@ -72,12 +72,20 @@ exports.getUserById = (req, res, next) => {
     }).catch(next);
 };
 
+// exports.updateUser = (req, res, next) => {
+//     User.findOneAndUpdate(req.body.id, req.body).then(user => {
+//         if (!user) return res.status(404).send('No user with that ID');
+//         return res.sendStatus(200);
+//     }).catch(next);
+// };
+
 exports.updateUser = (req, res, next) => {
-    User.findOneAndUpdate(req.body.id, req.body).then(user => {
-        if (!user) return res.status(404).send('No user with that ID');
-        return res.sendStatus(200);
-    }).catch(next);
-};
+  User.findOneAndUpdate({ _id: req.params.userId }, req.body, {}, (err, user) => {
+    if (err) return next(err)
+    if (!user) return res.status(404).send('Could not find user: ' + req.params.userId)
+    return res.sendStatus(200)
+  })
+}
 
 exports.deleteUser = (req, res, next) => {
     User.findByIdAndRemove(req.body.id)
