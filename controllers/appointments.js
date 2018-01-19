@@ -59,6 +59,7 @@ exports.getApts = (req, res, next) => {
 
 	const rest_id = req.body.id
 
+	console.log(rest_id)
 	Appointment.find({restId: rest_id}).then(apts => {
 		if (!apts) return res.status(404).send('Could not find apt.')
 		console.log(apts)
