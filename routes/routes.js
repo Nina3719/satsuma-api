@@ -16,7 +16,7 @@ router.route('/users')
   .post(users.createUser)
   .get(users.getUserById)
   .put(users.updateUser)
-  .delete(auth.validateUser, users.deleteUser)
+  .delete(users.deleteUser)
 
 router.route('/users/friend')
   .put(users.updateFriends)
