@@ -72,22 +72,28 @@ exports.getUserById = (req, res, next) => {
     }).catch(next);
 };
 
-// exports.updateUser = (req, res, next) => {
-//     User.findOneAndUpdate(req.body.id, req.body).then(user => {
-//         if (!user) return res.status(404).send('No user with that ID');
-//         return res.sendStatus(200);
-//     }).catch(next);
-// };
-
 exports.updateUser = (req, res, next) => {
+    User.findOneAndUpdate({_id: req.body.id}, req.body).then(user => {
+        if (!user) return res.status(404).send('No user with that ID');
+        return res.sendStatus(200);
+    }).catch(next);
+};
+
+exports.updateFriends = (req, res, next) => {
     console.log(req.body)
-    User.update(
-        { _id: req.body.id},
-        { $push: {ratings: req.body.ratings}}
-    ).then(user => {
-        console.log(user)
+    User.findById(req.body.id).then(user =>{
+      friends = user.ratings
+      if (friends.includes(req.body.ratings)) {
+        return res.sendStatus(404)
+      }
+      User.update(
+          { _id: req.body.id},
+          { $push: {ratings: req.body.ratings}}
+      ).then(user => {
+          console.log(user)
+      }).catch(next)
+      return res.sendStatus(200)
     })
-    return res.sendStatus(200)
 }
     // User.findByIdAndUpdate(req.body.id, req.body).then(user => {
     //     if (!user) return res.status(404).send('No user with that ID');
