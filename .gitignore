@@ -62,4 +62,4 @@ startserver.bat
 
 # config file
 models/mongod.conf
-
+models/config.js
