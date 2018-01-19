@@ -26,7 +26,7 @@ exports.loginUser = (req, res, next) => {
             user.token = token;
             user.save((err) => {
                 if (err) return next(err);
-                return res.json({ token, userId: user._id });
+                return res.json({ token, userId: user._id, name: user.name, email: user.email });
             });
         });
     });

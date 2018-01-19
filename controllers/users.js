@@ -48,6 +48,8 @@ exports.createUser = (req, res, next) => {
         .then(user => {
             if (!user) return res.status(500).send('User failed to create')
             return res.json({
+                name: user.name,
+                email: user.email,
                 userId: user._id,
                 token: user.token
             })
@@ -101,6 +103,8 @@ exports.updateFriends = (req, res, next) => {
     //     return res.sendStatus(200);
     // }).catch(next);
 // };
+// User.deleteMany({"classYear": { $gt 1} req.body.id)
+
 
 exports.deleteUser = (req, res, next) => {
     User.findByIdAndRemove(req.body.id)
