@@ -6,7 +6,6 @@ const router = express.Router();
 const auth = require('../controllers/auth')
 const users = require('../controllers/users')
 const yelp = require('../controllers/yelp')
-const appointments = require('../controllers/appointments')
 
 
 /*
@@ -15,8 +14,12 @@ const appointments = require('../controllers/appointments')
 router.route('/users')
   .post(users.createUser)
   .get(auth.validateUser, users.getUserById)
-  .put(auth.validateUser, users.updateUser)
+  .put(users.updateUser)
   .delete(auth.validateUser, users.deleteUser)
+
+router.route('/users/:userId/id')
+  .put(users.updateUser)
+  .delete(users.deleteUser)
 
 router.route('/allusers')
   .get(users.getAllUsers)
@@ -28,19 +31,10 @@ router.route('/auth/login')
 
 /*
 * Yelp Routes
-*/ 
+*/
 
 router.route('/yelpinfo')
   .get(yelp.getYelp)
-
-/*
-* Appointment Routes
-*/ 
-
-router.route('/restaurant')
-  .post(appointments.createApt)
-  .get(appointments.getApts)
- 
 
 // expose routes through router object
 module.exports = router;
