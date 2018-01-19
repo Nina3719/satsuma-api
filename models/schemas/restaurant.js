@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const User = require('./user')
 
 
 const appointmentSchema = new Schema({
     restId: String,
-    userId: String,
+    userId: {type: Schema.ObjectId, ref: 'User' },
     time: Date
   }, 
   {
