@@ -10,7 +10,7 @@ exports.loginUser = (req, res, next) => {
         return res.status(400).send('Missing password');
     User.findOne({email: req.body.email}, (err, user) => {
         if (err) return next(err);
-        if (!user) return res.status(404).send('No user with that email');
+        if (!user) return res.status(400).send('No user with that email');
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (err) return next(err);
             if (!isMatch)

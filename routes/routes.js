@@ -18,6 +18,9 @@ router.route('/users')
   .put(users.updateUser)
   .delete(auth.validateUser, users.deleteUser)
 
+router.route('/users/friend')
+  .put(users.updateFriends)
+
 router.route('/users/:userId/id')
   .put(users.updateUser)
   .delete(users.deleteUser)
@@ -37,13 +40,11 @@ router.route('/auth/login')
 router.route('/yelpinfo')
   .get(yelp.getYelp)
 
- /*
- * Appointment Routes
- */
 
- router.route('/restaurant')
- 	.post(appointments.createApt)
- 	.get(appointments.getApts)
+router.route('/restaurant')
+  .post(appointments.createApt)
+  .get(appointments.getApts)
+
 
 // expose routes through router object
 module.exports = router;
